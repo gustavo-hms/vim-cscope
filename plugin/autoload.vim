@@ -18,7 +18,9 @@ function! UpdateCscope()
 	if (!empty(db))
 		let oldpath = getcwd()
 		let path = strpart(db, 0, match(db, "/cscope.out$"))
-		exe "cd " . path
+		if (!empty(path))
+			exe "cd " . path
+		endif
 		!cscope -Rbq
 		exe "cd " . oldpath
 	endif
